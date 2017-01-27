@@ -5,6 +5,8 @@
 /asm/*
 /bin/*
 /libs/*
+/run/*
+/run
 *.psd
 *.iml
 *.ipr
@@ -17,3 +19,6 @@
 *.classpath
 *.project
 /.settings/*
+/minetweaker.log
+/options.txt
+/usernamecache.json
