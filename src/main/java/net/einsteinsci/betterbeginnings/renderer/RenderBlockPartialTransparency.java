@@ -1,14 +1,15 @@
 package net.einsteinsci.betterbeginnings.renderer;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.*;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererChestHelper;
 import net.minecraft.init.Blocks;
-import net.minecraft.src.FMLRenderAccessLibrary;
 import net.minecraft.util.IIcon;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 /**
  * Created by einsteinsci on 8/11/2014.
@@ -568,7 +569,7 @@ public class RenderBlockPartialTransparency extends RenderBlocks
 			}
 			else
 			{
-				FMLRenderAccessLibrary.renderInventoryBlock(this, block, renderType, j);
+			    RenderingRegistry.instance().renderInventoryBlock(this, block, renderType, j);
 			}
 		}
 		else
