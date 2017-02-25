@@ -7,7 +7,7 @@ import net.einsteinsci.betterbeginnings.ModMain;
 import net.einsteinsci.betterbeginnings.gui.GuiDoubleWorkbench;
 import net.einsteinsci.betterbeginnings.register.recipe.AdvancedCraftingHandler;
 import net.einsteinsci.betterbeginnings.register.recipe.AdvancedRecipe;
-import net.einsteinsci.betterbeginnings.register.recipe.OreRecipeElement;
+import net.einsteinsci.betterbeginnings.register.recipe.elements.RecipeElement;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -30,7 +30,7 @@ public class NEIAdvancedCraftingHandler extends TemplateRecipeHandler
 			inputs = new PositionedStack[9];
 			output = new PositionedStack(rec.getRecipeOutput(), 132, 51);
 
-			OreRecipeElement[] grid = rec.getThreeByThree();
+			RecipeElement[] grid = rec.getThreeByThree();
 			for (int y = 0; y < 3; y++)
 			{
 				for (int x = 0; x < 3; x++)
@@ -47,15 +47,15 @@ public class NEIAdvancedCraftingHandler extends TemplateRecipeHandler
 			}
 
 			catalysts = new PositionedStack[4];
-			OreRecipeElement[] side = rec.getNeededMaterials();
+			RecipeElement[] side = rec.getNeededMaterials();
 			for (int i = 0; i < side.length; i++)
 			{
 				if (side[i] == null)
 				{
 					continue;
 				}
-				
-				catalysts[i] = new PositionedStack(side[i].getValidItems(side[i].stackSize), 11, 23 + i * 18);
+				//TODO Investigate getValidItems(int amount)
+				catalysts[i] = new PositionedStack(side[i].getValidItems(), 11, 23 + i * 18);
 			}
 		}
 
@@ -118,10 +118,10 @@ public class NEIAdvancedCraftingHandler extends TemplateRecipeHandler
 			}
 
 			boolean found = false;
-			OreRecipeElement[] inp = adv.recipeItems;
+			RecipeElement[] inp = adv.recipeItems;
 			for (int i = 0; i < inp.length; i++)
 			{
-				OreRecipeElement ore = inp[i];
+				RecipeElement ore = inp[i];
 
 				if (ore == null)
 				{
@@ -141,10 +141,10 @@ public class NEIAdvancedCraftingHandler extends TemplateRecipeHandler
 			}
 
 			found = false;
-			OreRecipeElement[] ores = adv.getNeededMaterials();
+			RecipeElement[] ores = adv.getNeededMaterials();
 			for (int i = 0; i < ores.length; i++)
 			{
-				OreRecipeElement ore = ores[i];
+				RecipeElement ore = ores[i];
 
 				if (ore == null)
 				{

@@ -1,8 +1,7 @@
 package net.einsteinsci.betterbeginnings.register.recipe;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import net.einsteinsci.betterbeginnings.inventory.InventoryWorkbenchAdditionalMaterials;
+import net.einsteinsci.betterbeginnings.register.recipe.elements.RecipeElement;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,22 +21,22 @@ public class AdvancedRecipe
 	/**
 	 * Is a array of ItemStack that composes the recipe.
 	 */
-	public final OreRecipeElement[] recipeItems;
+	public final RecipeElement[] recipeItems;
 	/**
 	 * Is the ItemStack that you get when craft the recipe.
 	 */
 	private ItemStack recipeOutput;
 
 	// additional materials in the side slots
-	private OreRecipeElement[] addedMaterials;
+	private RecipeElement[] addedMaterials;
 
 	// ...something...
 	private boolean strangeFlag;
 
 	public final boolean hideFromNEI;
 
-	public AdvancedRecipe(int width, int height, OreRecipeElement[] items, ItemStack output,
-	                      OreRecipeElement[] materials, boolean hide)
+	public AdvancedRecipe(int width, int height, RecipeElement[] items, ItemStack output,
+	                      RecipeElement[] materials, boolean hide)
 	{
 		recipeWidth = width;
 		recipeHeight = height;
@@ -80,7 +79,7 @@ public class AdvancedRecipe
 			{
 				int i1 = k - width;
 				int j1 = l - height;
-				OreRecipeElement neededCraftingStack = null;
+				RecipeElement neededCraftingStack = null;
 
 				if (i1 >= 0 && j1 >= 0 && i1 < recipeWidth && j1 < recipeHeight)
 				{
@@ -110,7 +109,7 @@ public class AdvancedRecipe
 					}
 				}
 
-				for (OreRecipeElement requiredMatStack : addedMaterials)
+				for (RecipeElement requiredMatStack : addedMaterials)
 				{
 					boolean foundIt = false;
 					for (int i2 = 0; i2 < materials.getSizeInventory(); ++i2)
@@ -167,7 +166,7 @@ public class AdvancedRecipe
 			{
 				int i1 = k - width;
 				int j1 = l - height;
-				OreRecipeElement neededCraftingStack = null;
+				RecipeElement neededCraftingStack = null;
 
 				if (i1 >= 0 && j1 >= 0 && i1 < recipeWidth && j1 < recipeHeight)
 				{
@@ -204,23 +203,23 @@ public class AdvancedRecipe
 
 	public int getNeededMaterialCount(Item material)
 	{
-		for (OreRecipeElement stack : addedMaterials)
+		for (RecipeElement stack : addedMaterials)
 		{
 			if (stack.matches(new ItemStack(material)))
 			{
-				return stack.stackSize;
+				return stack.getStackSize();
 			}
 		}
 
 		return 0;
 	}
 
-	public OreRecipeElement[] getNeededMaterials()
+	public RecipeElement[] getNeededMaterials()
 	{
 		return addedMaterials;
 	}
 	
-	public OreRecipeElement[] getRecipeItems() 
+	public RecipeElement[] getRecipeItems() 
 	{
 		return recipeItems;
 	}
@@ -255,15 +254,15 @@ public class AdvancedRecipe
 		return recipeWidth * recipeHeight;
 	}
 
-	public OreRecipeElement[] getThreeByThree()
+	public RecipeElement[] getThreeByThree()
 	{
-		OreRecipeElement[] res = new OreRecipeElement[9];
+		RecipeElement[] res = new RecipeElement[9];
 
 		int y = 0, x = 0;
 		int v = 0, u = 0;
 		for (int i = 0; i < getRecipeSize(); i++)
 		{
-			OreRecipeElement ore = recipeItems[u + v * recipeWidth];
+			RecipeElement ore = recipeItems[u + v * recipeWidth];
 
 			if (ore != null)
 			{
@@ -292,7 +291,7 @@ public class AdvancedRecipe
 
 	public boolean hasMaterial(ItemStack stack)
 	{
-		for (OreRecipeElement s : addedMaterials)
+		for (RecipeElement s : addedMaterials)
 		{
 			if (s.matches(stack))
 			{

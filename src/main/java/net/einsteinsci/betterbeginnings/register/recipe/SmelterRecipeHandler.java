@@ -1,14 +1,13 @@
 package net.einsteinsci.betterbeginnings.register.recipe;
 
+import java.util.*;
+import java.util.Map.Entry;
+
+import net.einsteinsci.betterbeginnings.register.recipe.elements.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.*;
-import java.util.Map.Entry;
-
-import com.google.common.collect.Maps;
 
 public class SmelterRecipeHandler
 {
@@ -23,6 +22,11 @@ public class SmelterRecipeHandler
 		// nothing here
 	}
 
+	public static SmelterRecipe addRecipe(RecipeElement input, ItemStack output, float experience, int boosters, int bonus, float chance)
+	{
+		return smelting().putLists(input, output, experience, boosters, bonus, chance);
+	}
+
 	public static void addRecipe(Item input, ItemStack output, float experience, int gravel, int bonus, float chance)
 	{
 		smelting().addLists(input, output, experience, gravel, bonus, chance);
@@ -30,7 +34,7 @@ public class SmelterRecipeHandler
 
 	public void addLists(Item input, ItemStack output, float experience, int gravel, int bonus, float chance)
 	{
-		putLists(new OreRecipeElement(new ItemStack(input)), output, experience, gravel, bonus, chance);
+		putLists(new StackRecipeElement(new ItemStack(input)), output, experience, gravel, bonus, chance);
 	}
 
 	public static SmelterRecipeHandler smelting()
@@ -38,11 +42,12 @@ public class SmelterRecipeHandler
 		return SMELTINGBASE;
 	}
 
-	public void putLists(OreRecipeElement input, ItemStack output, float experience, int gravel, int bonus, float chance)
+	public SmelterRecipe putLists(RecipeElement input, ItemStack output, float experience, int gravel, int bonus, float chance)
 	{
 		experienceList.put(output, Float.valueOf(experience));
-
-		recipes.add(new SmelterRecipe(output, input, experience, gravel, bonus, chance));
+		SmelterRecipe recipe = new SmelterRecipe(output, input, experience, gravel, bonus, chance);
+		recipes.add(recipe);
+		return recipe;
 	}
 
 	public static void addRecipe(Block input, ItemStack output, float experience, int gravel, int bonus, float chance)
@@ -52,7 +57,7 @@ public class SmelterRecipeHandler
 
 	public static void addRecipe(ItemStack input, ItemStack output, float experience, int gravel, int bonus, float chance)
 	{
-		smelting().putLists(new OreRecipeElement(input), output, experience, gravel, bonus, chance);
+		smelting().putLists(new StackRecipeElement(input), output, experience, gravel, bonus, chance);
 	}
 
 	public static void addRecipe(String oreDict, ItemStack output, float experience, int gravel, int bonus, float chance)
@@ -159,5 +164,20 @@ public class SmelterRecipeHandler
 	public static Map getXPList()
 	{
 		return smelting().experienceList;
+	}
+
+	public static SmelterRecipe removeRecipe(RecipeElement input, ItemStack output)
+	{
+	    SmelterRecipe recipe;
+	    for(Iterator<SmelterRecipe> iter = SmelterRecipeHandler.getRecipes().iterator(); iter.hasNext();)
+	    {
+		 recipe = iter.next();
+		 if(recipe.getInput().equals(input) && ItemStack.areItemStacksEqual(recipe.getOutput(), output))
+		 {
+		     iter.remove();
+		     return recipe;
+		 }
+	    }
+	    return null;
 	}
 }

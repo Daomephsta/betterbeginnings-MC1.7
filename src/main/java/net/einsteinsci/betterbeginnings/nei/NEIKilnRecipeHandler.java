@@ -6,7 +6,7 @@ import codechicken.nei.recipe.FurnaceRecipeHandler;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 import net.einsteinsci.betterbeginnings.gui.GuiKiln;
 import net.einsteinsci.betterbeginnings.register.recipe.KilnRecipes;
-import net.einsteinsci.betterbeginnings.register.recipe.OreRecipeElement;
+import net.einsteinsci.betterbeginnings.register.recipe.elements.RecipeElement;
 import net.einsteinsci.betterbeginnings.tileentity.TileEntityKiln;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
@@ -26,7 +26,7 @@ public class NEIKilnRecipeHandler extends TemplateRecipeHandler
 		PositionedStack input;
 		PositionedStack output;
 
-		public KilnCachedRecipe(OreRecipeElement inp, ItemStack _output)
+		public KilnCachedRecipe(RecipeElement inp, ItemStack _output)
 		{
 			input = new PositionedStack(inp.getValidItems(), 51, 6);
 			output = new PositionedStack(_output, 111, 24);
@@ -84,9 +84,9 @@ public class NEIKilnRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public void loadCraftingRecipes(ItemStack result)
 	{
-		for (Map.Entry<OreRecipeElement, ItemStack> entry : KilnRecipes.getSmeltingList().entrySet())
+		for (Map.Entry<RecipeElement, ItemStack> entry : KilnRecipes.getSmeltingList().entrySet())
 		{
-			OreRecipeElement inp = entry.getKey();
+			RecipeElement inp = entry.getKey();
 			ItemStack outp = (ItemStack)entry.getValue();
 
 			if (outp.getItem() == result.getItem() &&
@@ -101,9 +101,9 @@ public class NEIKilnRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient)
 	{
-		for (Map.Entry<OreRecipeElement, ItemStack> entry : KilnRecipes.getSmeltingList().entrySet())
+		for (Map.Entry<RecipeElement, ItemStack> entry : KilnRecipes.getSmeltingList().entrySet())
 		{
-			OreRecipeElement inp = entry.getKey();
+			RecipeElement inp = entry.getKey();
 			ItemStack outp = entry.getValue();
 
 			if (inp.matches(ingredient))

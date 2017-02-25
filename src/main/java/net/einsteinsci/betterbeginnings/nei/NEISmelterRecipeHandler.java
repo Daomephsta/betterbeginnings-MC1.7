@@ -6,7 +6,7 @@ import codechicken.nei.recipe.FurnaceRecipeHandler;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 import net.einsteinsci.betterbeginnings.ModMain;
 import net.einsteinsci.betterbeginnings.gui.GuiSmelter;
-import net.einsteinsci.betterbeginnings.register.recipe.OreRecipeElement;
+import net.einsteinsci.betterbeginnings.register.recipe.elements.RecipeElement;
 import net.einsteinsci.betterbeginnings.register.recipe.SmelterRecipe;
 import net.einsteinsci.betterbeginnings.register.recipe.SmelterRecipeHandler;
 import net.einsteinsci.betterbeginnings.tileentity.TileEntitySmelter;
@@ -29,7 +29,7 @@ public class NEISmelterRecipeHandler extends TemplateRecipeHandler
 		PositionedStack output;
 		PositionedStack gravel;
 
-		public SmelterCachedRecipe(OreRecipeElement _input, ItemStack _output, int _gravel)
+		public SmelterCachedRecipe(RecipeElement _input, ItemStack _output, int _gravel)
 		{
 			input = new PositionedStack(_input.getValidItems(), 41, 6);
 			output = new PositionedStack(_output, 111, 24);

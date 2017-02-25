@@ -1,10 +1,9 @@
 package net.einsteinsci.betterbeginnings.register.recipe;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
+import net.einsteinsci.betterbeginnings.register.recipe.elements.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,17 +13,32 @@ public class CampfireRecipes
 {
 	private static final CampfireRecipes SMELTINGBASE = new CampfireRecipes();
 
-	private Map<OreRecipeElement, ItemStack> smeltingList = new HashMap<OreRecipeElement, ItemStack>();
+	private Map<RecipeElement, ItemStack> smeltingList = new HashMap<RecipeElement, ItemStack>();
 	private Map<ItemStack, Float> experienceList = new HashMap<ItemStack, Float>();
 
 	private CampfireRecipes()
 	{
 		// nothing here
 	}
-
+	
+	public static void removeRecipe(RecipeElement input, ItemStack output)
+	{
+	    ItemStack result = smelting().smeltingList.get(input);
+	    if(smelting().smeltingList.containsKey(input) && ItemStack.areItemStacksEqual(result, output)) return;
+	    {
+		smelting().experienceList.remove(result);
+		smelting().smeltingList.remove(input);
+	    }
+	}
+	
+	public static void addRecipe(RecipeElement input, ItemStack output, float xp)
+	{
+	    smelting().addLists(input, output, xp);
+	}
+	
 	public static void addRecipe(Item input, ItemStack output, float experience)
 	{
-		smelting().addLists(new OreRecipeElement(new ItemStack(input)), output, experience);
+		smelting().addLists(new StackRecipeElement(new ItemStack(input)), output, experience);
 	}
 	
 	public static void addRecipe(String oreDictEntry, ItemStack output, float experience)
@@ -32,7 +46,7 @@ public class CampfireRecipes
 		smelting().addLists(new OreRecipeElement(oreDictEntry, 1), output, experience);
 	}
 
-	public void addLists(OreRecipeElement input, ItemStack itemStack, float experience)
+	public void addLists(RecipeElement input, ItemStack itemStack, float experience)
 	{
 		putLists(input, itemStack, experience);
 	}
@@ -42,7 +56,7 @@ public class CampfireRecipes
 		return SMELTINGBASE;
 	}
 
-	public void putLists(OreRecipeElement input, ItemStack itemStack2, float experience)
+	public void putLists(RecipeElement input, ItemStack itemStack2, float experience)
 	{
 		smeltingList.put(input, itemStack2);
 		experienceList.put(itemStack2, experience);
@@ -50,18 +64,18 @@ public class CampfireRecipes
 
 	public static void addRecipe(Block input, ItemStack output, float experience)
 	{
-		smelting().addLists(new OreRecipeElement(new ItemStack(Item.getItemFromBlock(input))), output, experience);
+		smelting().addLists(new StackRecipeElement(new ItemStack(Item.getItemFromBlock(input))), output, experience);
 	}
 
 	public static void addRecipe(ItemStack input, ItemStack output, float experience)
 	{
-		smelting().putLists(new OreRecipeElement(input), output, experience);
+		smelting().putLists(new StackRecipeElement(input), output, experience);
 	}
 
 	public ItemStack getSmeltingResult(ItemStack stack)
 	{
-		Iterator<Entry<OreRecipeElement, ItemStack>> iterator = smeltingList.entrySet().iterator();
-		Entry<OreRecipeElement, ItemStack> entry;
+		Iterator<Entry<RecipeElement, ItemStack>> iterator = smeltingList.entrySet().iterator();
+		Entry<RecipeElement, ItemStack> entry;
 
 		do
 		{
@@ -76,7 +90,7 @@ public class CampfireRecipes
 		return (ItemStack)entry.getValue();
 	}
 
-	private boolean canBeSmelted(ItemStack stack, OreRecipeElement ore)
+	private boolean canBeSmelted(ItemStack stack, RecipeElement ore)
 	{
 		return ore.matches(stack);
 	}
@@ -111,7 +125,7 @@ public class CampfireRecipes
 		return entry.getValue();
 	}
 
-	public static Map<OreRecipeElement, ItemStack> getSmeltingList()
+	public static Map<RecipeElement, ItemStack> getSmeltingList()
 	{
 		return smelting().smeltingList;
 	}

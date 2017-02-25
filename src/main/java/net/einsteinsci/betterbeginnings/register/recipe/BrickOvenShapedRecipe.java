@@ -1,16 +1,13 @@
 package net.einsteinsci.betterbeginnings.register.recipe;
 
-import net.einsteinsci.betterbeginnings.tileentity.TileEntityBrickOven;
-import net.einsteinsci.betterbeginnings.tileentity.TileEntityNetherBrickOven;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.oredict.OreDictionary;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.ArrayUtils;
+import net.einsteinsci.betterbeginnings.register.recipe.elements.RecipeElement;
+import net.einsteinsci.betterbeginnings.tileentity.TileEntityBrickOven;
+import net.einsteinsci.betterbeginnings.tileentity.TileEntityNetherBrickOven;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class BrickOvenShapedRecipe implements IBrickOvenRecipe
 {
@@ -25,14 +22,14 @@ public class BrickOvenShapedRecipe implements IBrickOvenRecipe
 	/**
 	 * Is a array of ItemStack that composes the recipe.
 	 */
-	public final OreRecipeElement[] recipeItems;
+	public final RecipeElement[] recipeItems;
 	/**
 	 * Is the ItemStack that you get when craft the recipe.
 	 */
 	private ItemStack recipeOutput;
 	private boolean strangeField;
 
-	public BrickOvenShapedRecipe(int width, int height, OreRecipeElement[] input, ItemStack output)
+	public BrickOvenShapedRecipe(int width, int height, RecipeElement[] input, ItemStack output)
 	{
 		recipeWidth = width;
 		recipeHeight = height;
@@ -95,7 +92,7 @@ public class BrickOvenShapedRecipe implements IBrickOvenRecipe
 			{
 				int i1 = k - width;
 				int j1 = l - height;
-				OreRecipeElement recipeIngredient = null;
+				RecipeElement recipeIngredient = null;
 
 				if (i1 >= 0 && j1 >= 0 && i1 < recipeWidth && j1 < recipeHeight)
 				{
@@ -186,7 +183,7 @@ public class BrickOvenShapedRecipe implements IBrickOvenRecipe
 	@Override
 	public boolean contains(ItemStack stack)
 	{
-		for (OreRecipeElement ore : recipeItems)
+		for (RecipeElement ore : recipeItems)
 		{
 			if (ore == null)
 			{
@@ -218,7 +215,7 @@ public class BrickOvenShapedRecipe implements IBrickOvenRecipe
 			{
 				int i1 = k - width;
 				int j1 = l - height;
-				OreRecipeElement recipeIngredient = null;
+				RecipeElement recipeIngredient = null;
 
 				if (i1 >= 0 && j1 >= 0 && i1 < recipeWidth && j1 < recipeHeight)
 				{
@@ -259,10 +256,10 @@ public class BrickOvenShapedRecipe implements IBrickOvenRecipe
 	}*/
 
 	@Override
-	public OreRecipeElement[] getInputs()
+	public RecipeElement[] getInputs()
 	{
-		List<OreRecipeElement> buf = new ArrayList<>();
-		for (OreRecipeElement ore : recipeItems)
+		List<RecipeElement> buf = new ArrayList<>();
+		for (RecipeElement ore : recipeItems)
 		{
 			if (ore != null)
 			{
@@ -271,12 +268,12 @@ public class BrickOvenShapedRecipe implements IBrickOvenRecipe
 
 		}
 
-		return buf.toArray(new OreRecipeElement[0]);
+		return buf.toArray(new RecipeElement[0]);
 	}
 
-	public OreRecipeElement[] getThreeByThree()
+	public RecipeElement[] getThreeByThree()
 	{
-		OreRecipeElement[] res = new OreRecipeElement[9];
+		RecipeElement[] res = new RecipeElement[9];
 
 		int y = 0, x = 0;
 		int v = 0, u = 0;

@@ -1,18 +1,19 @@
 package net.einsteinsci.betterbeginnings.register.recipe;
 
+import net.einsteinsci.betterbeginnings.register.recipe.elements.RecipeElement;
 import net.minecraft.item.ItemStack;
 
 public class SmelterRecipe
 {
 	private ItemStack outputStack;
-	private OreRecipeElement input;
+	private RecipeElement input;
 	private float experienceGiven;
 	private int gravelNeeded;
 
 	private int bonusIfEnder;
 	private float bonusChance;
 
-	public SmelterRecipe(ItemStack output, OreRecipeElement input, float experience, int gravel, int bonus, float chance)
+	public SmelterRecipe(ItemStack output, RecipeElement input, float experience, int gravel, int bonus, float chance)
 	{
 		outputStack = output;
 		this.input = input;
@@ -27,7 +28,7 @@ public class SmelterRecipe
 		return outputStack;
 	}
 
-	public OreRecipeElement getInput()
+	public RecipeElement getInput()
 	{
 		return input;
 	}

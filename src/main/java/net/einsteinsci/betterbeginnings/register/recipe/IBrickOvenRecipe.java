@@ -1,5 +1,6 @@
 package net.einsteinsci.betterbeginnings.register.recipe;
 
+import net.einsteinsci.betterbeginnings.register.recipe.elements.RecipeElement;
 import net.einsteinsci.betterbeginnings.tileentity.TileEntityBrickOven;
 import net.einsteinsci.betterbeginnings.tileentity.TileEntityNetherBrickOven;
 import net.minecraft.item.ItemStack;
@@ -29,5 +30,5 @@ public interface IBrickOvenRecipe
 
 	ItemStack getRecipeOutput();
 
-	OreRecipeElement[] getInputs();
+	RecipeElement[] getInputs();
 }

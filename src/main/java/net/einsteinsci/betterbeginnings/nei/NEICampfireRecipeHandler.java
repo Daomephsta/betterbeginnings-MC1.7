@@ -7,7 +7,7 @@ import net.einsteinsci.betterbeginnings.gui.GuiCampfire;
 import net.einsteinsci.betterbeginnings.register.RegisterItems;
 import net.einsteinsci.betterbeginnings.register.recipe.CampfirePanRecipes;
 import net.einsteinsci.betterbeginnings.register.recipe.CampfireRecipes;
-import net.einsteinsci.betterbeginnings.register.recipe.OreRecipeElement;
+import net.einsteinsci.betterbeginnings.register.recipe.elements.RecipeElement;
 import net.einsteinsci.betterbeginnings.tileentity.TileEntityCampfire;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
@@ -29,7 +29,7 @@ public class NEICampfireRecipeHandler extends TemplateRecipeHandler
 		PositionedStack output;
 		PositionedStack pan;
 
-		public CampfireCachedRecipe(OreRecipeElement _input, ItemStack _output, boolean _pan)
+		public CampfireCachedRecipe(RecipeElement _input, ItemStack _output, boolean _pan)
 		{
 			input = new PositionedStack(_input.getValidItems(), 53, 1);
 			output = new PositionedStack(_output, 113, 23);
@@ -113,7 +113,7 @@ public class NEICampfireRecipeHandler extends TemplateRecipeHandler
 		{
 			Map.Entry entry = (Map.Entry)obj;
 
-			OreRecipeElement inp = (OreRecipeElement) entry.getKey();
+			RecipeElement inp = (RecipeElement) entry.getKey();
 			ItemStack outp = (ItemStack)entry.getValue();
 
 			if (outp.getItem() == result.getItem() &&
@@ -128,7 +128,7 @@ public class NEICampfireRecipeHandler extends TemplateRecipeHandler
 		{
 			Map.Entry entry = (Map.Entry)obj;
 
-			OreRecipeElement inp = (OreRecipeElement) entry.getKey();
+			RecipeElement inp = (RecipeElement) entry.getKey();
 			ItemStack outp = (ItemStack)entry.getValue();
 
 			if (outp.getItem() == result.getItem() &&
@@ -147,7 +147,7 @@ public class NEICampfireRecipeHandler extends TemplateRecipeHandler
 		{
 			Map.Entry entry = (Map.Entry)obj;
 
-			OreRecipeElement inp = (OreRecipeElement) entry.getKey();
+			RecipeElement inp = (RecipeElement) entry.getKey();
 			ItemStack outp = (ItemStack)entry.getValue();
 
 			if (inp.matches(ingredient))
@@ -160,7 +160,7 @@ public class NEICampfireRecipeHandler extends TemplateRecipeHandler
 		{
 			Map.Entry entry = (Map.Entry)obj;
 
-			OreRecipeElement inp = (OreRecipeElement) entry.getKey();
+			RecipeElement inp = (RecipeElement) entry.getKey();
 			ItemStack outp = (ItemStack)entry.getValue();
 
 			if (inp.matches(ingredient))

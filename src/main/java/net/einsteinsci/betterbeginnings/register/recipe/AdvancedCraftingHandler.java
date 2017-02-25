@@ -1,14 +1,15 @@
 package net.einsteinsci.betterbeginnings.register.recipe;
 
+import java.util.*;
+
 import net.einsteinsci.betterbeginnings.inventory.InventoryWorkbenchAdditionalMaterials;
+import net.einsteinsci.betterbeginnings.register.recipe.elements.*;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.*;
 
 public class AdvancedCraftingHandler
 {
@@ -37,13 +38,13 @@ public class AdvancedCraftingHandler
 		int width = 0;
 		int height = 0;
 
-		List<OreRecipeElement> addedMatList = new ArrayList<>();
+		List<RecipeElement> addedMatList = new ArrayList<>();
 		String lastString = "";
 		for (Object mat : additionalMaterials)
 		{
 			if (mat instanceof ItemStack)
 			{
-				addedMatList.add(new OreRecipeElement((ItemStack)mat));
+				addedMatList.add(new StackRecipeElement((ItemStack)mat));
 			}
 			else if (mat instanceof String)
 			{
@@ -54,7 +55,7 @@ public class AdvancedCraftingHandler
 				addedMatList.add(new OreRecipeElement(lastString, (Integer)mat));
 			}
 		}
-		OreRecipeElement[] addedMats = addedMatList.toArray(new OreRecipeElement[0]);
+		RecipeElement[] addedMats = addedMatList.toArray(new RecipeElement[0]);
 
 		// First String(s) in args
 		if (args[i] instanceof String[])
@@ -86,20 +87,20 @@ public class AdvancedCraftingHandler
 		for (; i < args.length; i += 2)
 		{
 			Character character = (Character)args[i];
-			OreRecipeElement stackInRecipe = null;
+			RecipeElement stackInRecipe = null;
 
 			if (args[i + 1] instanceof Item)
 			{
-				stackInRecipe = new OreRecipeElement(new ItemStack((Item)args[i + 1], 1, OreDictionary.WILDCARD_VALUE));
+				stackInRecipe = new StackRecipeElement(new ItemStack((Item)args[i + 1], 1, OreDictionary.WILDCARD_VALUE));
 			}
 			else if (args[i + 1] instanceof Block)
 			{
-				stackInRecipe = new OreRecipeElement(
+				stackInRecipe = new StackRecipeElement(
 						new ItemStack((Block)args[i + 1], 1, OreDictionary.WILDCARD_VALUE));
 			}
 			else if (args[i + 1] instanceof ItemStack)
 			{
-				stackInRecipe = new OreRecipeElement((ItemStack)args[i + 1]);
+				stackInRecipe = new StackRecipeElement((ItemStack)args[i + 1]);
 			}
 			else if (args[i + 1] instanceof String)
 			{
@@ -109,7 +110,7 @@ public class AdvancedCraftingHandler
 			hashmap.put(character, stackInRecipe);
 		}
 
-		OreRecipeElement[] neededItems = new OreRecipeElement[width * height];
+		RecipeElement[] neededItems = new RecipeElement[width * height];
 
 		for (int j = 0; j < width * height; ++j)
 		{
@@ -117,7 +118,7 @@ public class AdvancedCraftingHandler
 
 			if (hashmap.containsKey(Character.valueOf(iterChar)))
 			{
-				neededItems[j] = ((OreRecipeElement)hashmap.get(Character.valueOf(iterChar))).copy();
+				neededItems[j] = ((RecipeElement)hashmap.get(Character.valueOf(iterChar))).copy();
 			}
 			else
 			{

@@ -1,10 +1,15 @@
 package net.einsteinsci.betterbeginnings.gui;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.einsteinsci.betterbeginnings.ModMain;
 import net.einsteinsci.betterbeginnings.inventory.ContainerDoubleWorkbench;
-import net.einsteinsci.betterbeginnings.register.recipe.*;
+import net.einsteinsci.betterbeginnings.register.recipe.AdvancedCraftingHandler;
+import net.einsteinsci.betterbeginnings.register.recipe.AdvancedRecipe;
+import net.einsteinsci.betterbeginnings.register.recipe.elements.RecipeElement;
 import net.einsteinsci.betterbeginnings.renderer.RenderItemPartialTransparency;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -16,8 +21,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 @SideOnly(Side.CLIENT)
 public class GuiDoubleWorkbench extends GuiContainer
@@ -78,7 +81,7 @@ public class GuiDoubleWorkbench extends GuiContainer
 				{
 					for (int i = 0; i < recipe.getNeededMaterials().length; ++i)
 					{
-						OreRecipeElement neededElement = recipe.getNeededMaterials()[i];
+						RecipeElement neededElement = recipe.getNeededMaterials()[i];
 						ItemStack needed = neededElement.getFirst().copy();
 
 						if (needed.getItemDamage() == OreDictionary.WILDCARD_VALUE)

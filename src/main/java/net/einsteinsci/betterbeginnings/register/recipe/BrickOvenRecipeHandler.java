@@ -1,13 +1,9 @@
 package net.einsteinsci.betterbeginnings.register.recipe;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import cpw.mods.fml.common.FMLLog;
+import net.einsteinsci.betterbeginnings.register.recipe.elements.*;
 import net.einsteinsci.betterbeginnings.tileentity.TileEntityBrickOven;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -66,20 +62,20 @@ public class BrickOvenRecipeHandler
 		for (hashmap = new HashMap(); i < args.length; i += 2)
 		{
 			Character character = (Character)args[i];
-			OreRecipeElement stackInRecipe = null;
+			RecipeElement stackInRecipe = null;
 
 			if (args[i + 1] instanceof Item)
 			{
-				stackInRecipe = new OreRecipeElement(new ItemStack((Item)args[i + 1], 1, OreDictionary.WILDCARD_VALUE));
+				stackInRecipe = new StackRecipeElement(new ItemStack((Item)args[i + 1], 1, OreDictionary.WILDCARD_VALUE));
 			}
 			else if (args[i + 1] instanceof Block)
 			{
-				stackInRecipe = new OreRecipeElement(
+				stackInRecipe = new StackRecipeElement(
 						new ItemStack((Block)args[i + 1], 1, OreDictionary.WILDCARD_VALUE));
 			}
 			else if (args[i + 1] instanceof ItemStack)
 			{
-				stackInRecipe = new OreRecipeElement((ItemStack)args[i + 1]);
+				stackInRecipe = new StackRecipeElement((ItemStack)args[i + 1]);
 			}
 			else if (args[i + 1] instanceof String)
 			{
@@ -89,7 +85,7 @@ public class BrickOvenRecipeHandler
 			hashmap.put(character, stackInRecipe);
 		}
 
-		OreRecipeElement[] aOreRecipeElement = new OreRecipeElement[j * k];
+		RecipeElement[] aOreRecipeElement = new RecipeElement[j * k];
 
 		for (int i1 = 0; i1 < j * k; ++i1)
 		{
@@ -97,7 +93,7 @@ public class BrickOvenRecipeHandler
 
 			if (hashmap.containsKey(Character.valueOf(c0)))
 			{
-				aOreRecipeElement[i1] = (OreRecipeElement) hashmap.get(Character.valueOf(c0));
+				aOreRecipeElement[i1] = (RecipeElement) hashmap.get(Character.valueOf(c0));
 			}
 			else
 			{
@@ -122,7 +118,7 @@ public class BrickOvenRecipeHandler
 
 	public BrickOvenShapelessRecipe putShapelessRecipe(ItemStack output, Object... args)
 	{
-		ArrayList<OreRecipeElement> arraylist = new ArrayList<OreRecipeElement>();
+		ArrayList<RecipeElement> arraylist = new ArrayList<RecipeElement>();
 		Object[] aobject = args;
 		int i = args.length;
 
@@ -132,27 +128,27 @@ public class BrickOvenRecipeHandler
 
 			if (object1 instanceof ItemStack)
 			{
-				arraylist.add(new OreRecipeElement((ItemStack)object1));
+				arraylist.add(new StackRecipeElement((ItemStack)object1));
 			}
 			else if (object1 instanceof Item)
 			{
-				arraylist.add(new OreRecipeElement(new ItemStack((Item)object1)));
+				arraylist.add(new StackRecipeElement(new ItemStack((Item)object1)));
 			}
 			else if (object1 instanceof Block)
 			{
-				arraylist.add(new OreRecipeElement(new ItemStack((Block)object1)));
+				arraylist.add(new StackRecipeElement(new ItemStack((Block)object1)));
 			}
-			else if(object1 instanceof OreRecipeElement)
+			else if(object1 instanceof RecipeElement)
 			{
-				arraylist.add((OreRecipeElement) object1);
+				arraylist.add((RecipeElement) object1);
 			}
 			else
 			{
-				if (!(object1 instanceof OreRecipeElement))
+				if (!(object1 instanceof RecipeElement))
 				{	
 					FMLLog.warning("Invalid shapeless recipe!");
 				}
-				arraylist.add((OreRecipeElement) object1);
+				arraylist.add((RecipeElement) object1);
 			}
 		}
 

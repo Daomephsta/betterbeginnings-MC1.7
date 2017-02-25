@@ -9,7 +9,7 @@ import net.einsteinsci.betterbeginnings.register.recipe.BrickOvenRecipeHandler;
 import net.einsteinsci.betterbeginnings.register.recipe.BrickOvenShapedRecipe;
 import net.einsteinsci.betterbeginnings.register.recipe.BrickOvenShapelessRecipe;
 import net.einsteinsci.betterbeginnings.register.recipe.IBrickOvenRecipe;
-import net.einsteinsci.betterbeginnings.register.recipe.OreRecipeElement;
+import net.einsteinsci.betterbeginnings.register.recipe.elements.RecipeElement;
 import net.einsteinsci.betterbeginnings.tileentity.TileEntityBrickOven;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
@@ -41,7 +41,7 @@ public class NEIBrickOvenRecipeHandler extends TemplateRecipeHandler
 				BrickOvenShapedRecipe shaped = (BrickOvenShapedRecipe)ibr;
 
 				output = new PositionedStack(shaped.getRecipeOutput(), 119, 10);
-				OreRecipeElement[] grid = shaped.getThreeByThree();
+				RecipeElement[] grid = shaped.getThreeByThree();
 				for (int y = 0; y < 3; y++)
 				{
 					for (int x = 0; x < 3; x++)
@@ -61,7 +61,7 @@ public class NEIBrickOvenRecipeHandler extends TemplateRecipeHandler
 				BrickOvenShapelessRecipe shapeless = (BrickOvenShapelessRecipe)ibr;
 
 				output = new PositionedStack(shapeless.getRecipeOutput(), 119, 10);
-				OreRecipeElement[] stacks = shapeless.getInputs();
+				RecipeElement[] stacks = shapeless.getInputs();
 				for (int y = 0; y < 3; y++)
 				{
 					for (int x = 0; x < 3; x++)
@@ -137,10 +137,10 @@ public class NEIBrickOvenRecipeHandler extends TemplateRecipeHandler
 		for (IBrickOvenRecipe ibr : BrickOvenRecipeHandler.getRecipeList())
 		{
 			boolean found = false;
-			OreRecipeElement[] inp = ibr.getInputs();
+			RecipeElement[] inp = ibr.getInputs();
 			for (int i = 0; i < inp.length; i++)
 			{
-				OreRecipeElement ore = inp[i];
+				RecipeElement ore = inp[i];
 
 				if (ore == null)
 				{

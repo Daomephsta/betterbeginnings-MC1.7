@@ -1,24 +1,24 @@
 package net.einsteinsci.betterbeginnings.register.recipe;
 
+import java.util.*;
+
+import net.einsteinsci.betterbeginnings.register.recipe.elements.RecipeElement;
 import net.einsteinsci.betterbeginnings.tileentity.TileEntityBrickOven;
 import net.einsteinsci.betterbeginnings.tileentity.TileEntityNetherBrickOven;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.*;
 
 public class BrickOvenShapelessRecipe implements IBrickOvenRecipe
 {
 	/**
 	 * Is a List of ItemStack that composes the recipe.
 	 */
-	public final List<OreRecipeElement> recipeItems;
+	public final List<RecipeElement> recipeItems;
 	/**
 	 * Is the ItemStack that you get when craft the recipe.
 	 */
 	private final ItemStack recipeOutput;
 
-	public BrickOvenShapelessRecipe(ItemStack output, List<OreRecipeElement> input)
+	public BrickOvenShapelessRecipe(ItemStack output, List<RecipeElement> input)
 	{
 		recipeOutput = output;
 		recipeItems = input;
@@ -30,7 +30,7 @@ public class BrickOvenShapelessRecipe implements IBrickOvenRecipe
 	@Override
 	public boolean matches(TileEntityBrickOven oven)
 	{
-		ArrayList<OreRecipeElement> arraylist = new ArrayList<OreRecipeElement>(recipeItems);
+		ArrayList<RecipeElement> arraylist = new ArrayList<RecipeElement>(recipeItems);
 
 		for (int col = 0; col < 3; ++col)
 		{
@@ -45,7 +45,7 @@ public class BrickOvenShapelessRecipe implements IBrickOvenRecipe
 
 					while (iterator.hasNext())
 					{
-						OreRecipeElement itemstack1 = (OreRecipeElement)iterator.next();
+						RecipeElement itemstack1 = (RecipeElement)iterator.next();
 
 						if (itemstack1 != null && itemstack1.matches(itemstack))
 						{
@@ -69,7 +69,7 @@ public class BrickOvenShapelessRecipe implements IBrickOvenRecipe
 	@Override
 	public boolean matches(TileEntityNetherBrickOven oven)
 	{
-		ArrayList<OreRecipeElement> arraylist = new ArrayList<OreRecipeElement>(recipeItems);
+		ArrayList<RecipeElement> arraylist = new ArrayList<RecipeElement>(recipeItems);
 
 		for (int col = 0; col < 3; ++col)
 		{
@@ -84,7 +84,7 @@ public class BrickOvenShapelessRecipe implements IBrickOvenRecipe
 
 					while (iterator.hasNext())
 					{
-						OreRecipeElement itemstack1 = (OreRecipeElement)iterator.next();
+						RecipeElement itemstack1 = (RecipeElement)iterator.next();
 
 						if (itemstack1.matches(itemstack))
 						{
@@ -132,7 +132,7 @@ public class BrickOvenShapelessRecipe implements IBrickOvenRecipe
 	@Override
 	public boolean contains(ItemStack stack)
 	{
-		for (OreRecipeElement ore : recipeItems)
+		for (RecipeElement ore : recipeItems)
 		{
 			if (ore.matches(stack))
 			{
@@ -149,10 +149,10 @@ public class BrickOvenShapelessRecipe implements IBrickOvenRecipe
 	}
 
 	@Override
-	public OreRecipeElement[] getInputs()
+	public RecipeElement[] getInputs()
 	{
-		List<OreRecipeElement> buf = new ArrayList<>();
-		for (OreRecipeElement ore : recipeItems)
+		List<RecipeElement> buf = new ArrayList<>();
+		for (RecipeElement ore : recipeItems)
 		{
 			if (ore != null)
 			{
@@ -160,6 +160,6 @@ public class BrickOvenShapelessRecipe implements IBrickOvenRecipe
 			}
 		}
 
-		return buf.toArray(new OreRecipeElement[0]);
+		return buf.toArray(new RecipeElement[0]);
 	}
 }
