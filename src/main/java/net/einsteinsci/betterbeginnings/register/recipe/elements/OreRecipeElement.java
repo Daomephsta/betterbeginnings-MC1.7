@@ -57,7 +57,7 @@ public class OreRecipeElement extends RecipeElement
 	@Override
 	public boolean matchesCheckSize(ItemStack stackGiven) 
 	{
-		if(stackSize != stackGiven.stackSize) return false;
+		if(stackSize > stackGiven.stackSize) return false;
 		return matches(stackGiven);
 	}
 	

@@ -78,7 +78,7 @@ public class StackRecipeElement extends RecipeElement
 	@Override
 	public boolean matchesCheckSize(ItemStack stackGiven) 
 	{
-	    return stack.getItem() == stackGiven.getItem() && (stack.getItemDamage() == stackGiven.getItemDamage() || stack.getItemDamage() == OreDictionary.WILDCARD_VALUE) && ItemStack.areItemStackTagsEqual(stack, stackGiven) && stack.stackSize == stackGiven.stackSize;
+	    return stack.getItem() == stackGiven.getItem() && (stack.getItemDamage() == stackGiven.getItemDamage() || stack.getItemDamage() == OreDictionary.WILDCARD_VALUE) && ItemStack.areItemStackTagsEqual(stack, stackGiven) && stack.stackSize <= stackGiven.stackSize;
 	}
 	
 	public ItemStack getStack() 
