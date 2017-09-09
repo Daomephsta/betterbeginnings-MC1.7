@@ -3,7 +3,6 @@ package net.einsteinsci.betterbeginnings.register.recipe;
 import net.einsteinsci.betterbeginnings.inventory.InventoryWorkbenchAdditionalMaterials;
 import net.einsteinsci.betterbeginnings.register.recipe.elements.RecipeElement;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -201,11 +200,11 @@ public class AdvancedRecipe
 		return true;
 	}
 
-	public int getNeededMaterialCount(Item material)
+	public int getNeededMaterialCount(ItemStack material)
 	{
 		for (RecipeElement stack : addedMaterials)
 		{
-			if (stack.matches(new ItemStack(material)))
+			if (stack.matches(material))
 			{
 				return stack.getStackSize();
 			}

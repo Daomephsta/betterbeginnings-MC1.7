@@ -2,14 +2,17 @@ package net.einsteinsci.betterbeginnings.inventory;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.einsteinsci.betterbeginnings.items.ItemKnife;
-import net.einsteinsci.betterbeginnings.register.recipe.AdvancedCraftingHandler;
 import net.einsteinsci.betterbeginnings.register.recipe.AdvancedRecipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.stats.AchievementList;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
@@ -195,7 +198,7 @@ public class SlotAdvancedCrafting extends Slot
 
 				if (advRecipe != null)
 				{
-					amount = advRecipe.getNeededMaterialCount(matStack.getItem());
+					amount = advRecipe.getNeededMaterialCount(matStack);
 				}
 
 				additionalMaterials.decrStackSize(i, amount);
