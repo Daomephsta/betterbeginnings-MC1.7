@@ -193,7 +193,7 @@ public class CampfireTweaker
 	    for(Iterator<Map.Entry<RecipeElement, ItemStack>> iter = CampfireRecipes.getSmeltingList().entrySet().iterator(); iter.hasNext();)
 	    {
 		recipe = iter.next();
-		if(ItemStack.areItemStacksEqual(recipe.getValue(), targetOutput))
+		if(targetOutput.isItemEqual(recipe.getValue()) && ItemStack.areItemStackTagsEqual(targetOutput, recipe.getValue()))
 		{
 		    CampfireRecipeWrapper wrapper = new CampfireRecipeWrapper(recipe.getKey(), recipe.getValue(), CampfireRecipes.smelting().giveExperience(recipe.getValue()), false); 
 		    removedRecipes.add(wrapper);
@@ -203,7 +203,7 @@ public class CampfireTweaker
 	    for(Iterator<Map.Entry<RecipeElement, ItemStack>> iter = CampfirePanRecipes.getSmeltingList().entrySet().iterator(); iter.hasNext();)
 	    {
 		recipe = iter.next();
-		if(ItemStack.areItemStacksEqual(recipe.getValue(), targetOutput))
+		if(targetOutput.isItemEqual(recipe.getValue()) && ItemStack.areItemStackTagsEqual(targetOutput, recipe.getValue()))
 		{
 		    CampfireRecipeWrapper wrapper = new CampfireRecipeWrapper(recipe.getKey(), recipe.getValue(), CampfirePanRecipes.smelting().giveExperience(recipe.getValue()), true);
 		    removedRecipes.add(wrapper);

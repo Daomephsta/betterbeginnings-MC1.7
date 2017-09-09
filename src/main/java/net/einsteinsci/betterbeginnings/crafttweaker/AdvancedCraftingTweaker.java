@@ -174,6 +174,7 @@ public class AdvancedCraftingTweaker
 	public RemoveACTOutput(IItemStack output)
 	{
 	    super(NAME);
+	    this.output = MineTweakerMC.getItemStack(output);
 	}
 
 	@Override
@@ -182,7 +183,7 @@ public class AdvancedCraftingTweaker
 	    for(Iterator<AdvancedRecipe> iter = AdvancedCraftingHandler.getRecipeList().iterator(); iter.hasNext();)
 	    {
 		AdvancedRecipe recipe = iter.next();
-		if(ItemStack.areItemStacksEqual(output, recipe.getRecipeOutput()))
+		if(output.isItemEqual(recipe.getRecipeOutput()) && ItemStack.areItemStackTagsEqual(output, recipe.getRecipeOutput()))
 		{
 		    removedRecipes.add(recipe);
 		    iter.remove();

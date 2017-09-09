@@ -130,7 +130,7 @@ public class KilnTweaker
 	    for(Iterator<Map.Entry<RecipeElement, ItemStack>> iter = KilnRecipes.getSmeltingList().entrySet().iterator(); iter.hasNext();)
 	    {
 		recipe = iter.next();
-		if(ItemStack.areItemStacksEqual(recipe.getValue(), targetOutput))
+		if(targetOutput.isItemEqual(recipe.getValue()) && ItemStack.areItemStackTagsEqual(targetOutput, recipe.getValue()))
 		{
 		    KilnRecipeWrapper wrapper = new KilnRecipeWrapper(recipe.getKey(), recipe.getValue(), KilnRecipes.smelting().giveExperience(recipe.getValue()));
 		    removedRecipes.add(wrapper);

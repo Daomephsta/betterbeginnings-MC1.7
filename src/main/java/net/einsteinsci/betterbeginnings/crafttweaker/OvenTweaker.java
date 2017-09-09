@@ -257,7 +257,7 @@ public class OvenTweaker
 	    for(Iterator<IBrickOvenRecipe> iter = BrickOvenRecipeHandler.getRecipeList().iterator(); iter.hasNext();)
 	    {
 		IBrickOvenRecipe recipe = iter.next();
-		if(ItemStack.areItemStacksEqual(output, recipe.getRecipeOutput()))
+		if(output.isItemEqual(recipe.getRecipeOutput()) && ItemStack.areItemStackTagsEqual(output, recipe.getRecipeOutput()))
 		{
 		    removedRecipes.add(recipe);
 		    iter.remove();

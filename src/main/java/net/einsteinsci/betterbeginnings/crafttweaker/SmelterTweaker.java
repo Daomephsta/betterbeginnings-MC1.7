@@ -149,7 +149,7 @@ public class SmelterTweaker
 	    for(Iterator<SmelterRecipe> iter = SmelterRecipeHandler.getRecipes().iterator(); iter.hasNext();)
 	    {
 		SmelterRecipe recipe = iter.next();
-		if(ItemStack.areItemStacksEqual(recipe.getOutput(), output))
+		if(output.isItemEqual(recipe.getOutput()) && ItemStack.areItemStackTagsEqual(output, recipe.getOutput()))
 		{
 		    iter.remove();
 		    removedRecipes.add(recipe);
